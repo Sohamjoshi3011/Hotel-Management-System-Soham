@@ -1,6 +1,8 @@
 from fastapi import FastAPI
-from routes import auth
+from routes import auth, hotel, room
 
 app = FastAPI()
 
 app.include_router(auth.router)
+app.include_router(hotel.router)
+app.include_router(room.router)
