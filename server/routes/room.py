@@ -5,6 +5,7 @@ from models.room import Room
 from schemas.room import RoomCreate
 from auth.security import get_current_user
 from models.user import RoleEnum
+from models.manager_hotel import ManagerHotel
 
 router = APIRouter(prefix="/rooms")
 
@@ -19,6 +20,15 @@ def get_db():
 def create_room(data: RoomCreate, user=Depends(get_current_user), db: Session = Depends(get_db)):
     if user.role not in [RoleEnum.ADMIN, RoleEnum.MANAGER]:
         raise HTTPException(status_code=403, detail="Not allowed")
+
+    if user.role == RoleEnum.MANAGER:
+        assignment = db.query(ManagerHotel).filter(
+            ManagerHotel.manager_id == user.user_id,
+            ManagerHotel.hotel_id == data.hotel_id
+        ).first()
+
+        if not assignment:
+            raise HTTPException(403, "Not assigned to this hotel")
 
     room = Room(**data.model_dump())
     db.add(room)
