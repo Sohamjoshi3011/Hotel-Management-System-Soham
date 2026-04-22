@@ -2,6 +2,15 @@ import { useEffect, useState } from 'react'
 import RoomCard from '../components/RoomCard'
 import api from '../services/api'
 
+
+const analyticsMeta = {
+  total_rooms: { label: 'Total Rooms', icon: '🏨', color: 'from-blue-500 to-blue-600' },
+  occupied_rooms: { label: 'Occupied', icon: '🛏️', color: 'from-rose-500 to-red-500' },
+  available_rooms: { label: 'Available', icon: '✅', color: 'from-emerald-500 to-green-500' },
+  cleaning_rooms: { label: 'Cleaning', icon: '🧽', color: 'from-amber-400 to-yellow-500' },
+}
+
+
 export default function ManagerDashboard() {
   const [hotelId, setHotelId] = useState(1)
   const [rooms, setRooms] = useState([])
