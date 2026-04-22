@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-bgLight text-textDark;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-sm hover:shadow-md transition;
+}
