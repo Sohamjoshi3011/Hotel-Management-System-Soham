@@ -1,7 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
+
+import { useEffect, useMemo, useState } from 'react'
+
+import { useEffect, useState } from 'react'
+
 import Navbar from '../components/Navbar'
 import HotelCard from '../components/HotelCard'
 import api from '../services/api'
+
 
 const sampleHotels = [
   {
@@ -54,10 +60,12 @@ const testimonials = [
   { name: 'Neha P.', quote: 'Loved the premium feel and quick check-in process.' },
 ]
 
+
 export default function HomePage() {
   const [hotels, setHotels] = useState([])
 
   useEffect(() => {
+
     api.get('/hotels/')
       .then((res) => {
         const normalized = (res.data || []).map((hotel, index) => ({
@@ -80,7 +88,7 @@ export default function HomePage() {
       <Navbar />
 
       <section className="relative h-[78vh] min-h-[520px]">
-        <img alt="Luxury hotel hero" src="https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=2200&q=80" className="h-full w-full object-cover" />
+        <img src="https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=2200&q=80" className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/55 to-blue-900/35" />
         <div className="absolute inset-0 container-page flex flex-col justify-center">
           <span className="inline-flex w-fit bg-white/15 text-white px-4 py-1.5 rounded-full mb-5 backdrop-blur">Luxury stays made effortless</span>
@@ -138,6 +146,29 @@ export default function HomePage() {
           <p className="font-semibold">RoyalStay Hospitality Platform</p>
           <p className="text-sm">Book Now - Call {displayHotels[0]?.phone_number || '+91 98765 43210'}</p>
         </div>
+    api.get('/hotels/').then((res) => setHotels(res.data)).catch(() => setHotels([]))
+  }, [])
+
+  return (
+    <div>
+      <Navbar />
+      <section className="h-[360px] relative">
+        <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1800" className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-black/45 flex items-center justify-center">
+          <h1 className="text-white text-5xl font-bold">Find Your Perfect Stay</h1>
+        </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-6 py-12">
+        <h2 className="text-2xl font-bold mb-6">Featured Hotels</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {hotels.map((hotel) => <HotelCard key={hotel.hotel_id} hotel={hotel} />)}
+        </div>
+      </section>
+
+      <footer className="bg-primary text-white text-center py-6 font-medium">
+        Book Now - Call {hotels[0]?.phone_number || '+91 98765 43210'}
+
       </footer>
     </div>
   )

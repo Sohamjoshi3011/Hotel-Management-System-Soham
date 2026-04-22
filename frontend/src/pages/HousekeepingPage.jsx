@@ -27,6 +27,13 @@ export default function HousekeepingPage() {
     } catch (err) {
       setMessage(`❌ ${err.message}`)
     }
+
+  const load = () => api.get('/housekeeping/tasks').then((res) => setTasks(res.data))
+  useEffect(() => { load() }, [])
+
+  const complete = async (id) => {
+    await api.post(`/housekeeping/tasks/${id}/complete`)
+    load()
   }
 
   return (
@@ -44,6 +51,11 @@ export default function HousekeepingPage() {
           </div>
         ))}
         {!tasks.length && <p className="text-sm text-textGray">No pending tasks.</p>}
+              <p className="text-sm text-textGray">{t.notes}</p>
+            </div>
+            <button onClick={() => complete(t.task_id)} className="bg-emerald text-white rounded px-4 py-2">Mark Complete</button>
+          </div>
+        ))}
       </div>
     </div>
   )

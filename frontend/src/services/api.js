@@ -22,4 +22,8 @@ api.interceptors.response.use(
   },
 )
 
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
+})
+
 export default api
