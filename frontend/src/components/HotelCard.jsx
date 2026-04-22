@@ -1,5 +1,6 @@
 export default function HotelCard({ hotel }) {
   return (
+    
 
     <article className="card overflow-hidden group hover:-translate-y-1">
       <div className="overflow-hidden">
@@ -22,6 +23,7 @@ export default function HotelCard({ hotel }) {
         </div>
         <p className="text-sm text-textGray">Book Now - Call <span className="font-medium text-textDark">{hotel.phone_number}</span></p>
 
+          
     <article className="card overflow-hidden">
       <img src={hotel.image_url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900'} alt={hotel.name} className="h-48 w-full object-cover" />
       <div className="p-5 space-y-2">

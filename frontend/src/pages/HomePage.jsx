@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react'
 
 import { useEffect, useMemo, useState } from 'react'
 
@@ -145,7 +146,6 @@ export default function HomePage() {
           <p className="font-semibold">RoyalStay Hospitality Platform</p>
           <p className="text-sm">Book Now - Call {displayHotels[0]?.phone_number || '+91 98765 43210'}</p>
         </div>
-=======
     api.get('/hotels/').then((res) => setHotels(res.data)).catch(() => setHotels([]))
   }, [])
 
